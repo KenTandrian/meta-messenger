@@ -1,7 +1,7 @@
 import React from "react";
 import { Message } from "../typings";
-import ChatInput from "./ChatInput";
-import MessageList from "./MessageList";
+import ChatInput from "../components/ChatInput";
+import MessageList from "../components/MessageList";
 
 const HomePage = async () => {
   const data = await fetch(`${process.env.VERCEL_URL}/api/getMessages`).then(
