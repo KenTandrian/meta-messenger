@@ -31,7 +31,7 @@ const ChatInput = () => {
         body: JSON.stringify({ message }),
       });
       const data = await res.json();
-      console.log("MESSAGE ADDED >>> " + data);
+      console.log("MESSAGE ADDED >>> ", data);
     };
 
     uploadMessageToUpstash();
