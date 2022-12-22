@@ -10,6 +10,7 @@
     "next": "13.0.8-canary.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "swr": "^2.0.0",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
