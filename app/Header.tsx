@@ -1,10 +1,33 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import LogoutBtn from "./LogoutBtn";
 
 const Header = () => {
+  const session = true;
+
+  if (session)
+    return (
+      <header className="sticky top-0 z-50 bg-white flex justify-between items-center p-5 shadow-sm">
+        <div className="flex space-x-2">
+          <Image
+            className="rounded-full mx-2 object-contain"
+            height={10}
+            width={50}
+            src="https://links.papareact.com/jne"
+            alt="Profile Picture"
+          />
+          <div>
+            <p className="text-blue-400">Logged in as:</p>
+            <p className="font-bold text-lg">Ken Tandrian</p>
+          </div>
+        </div>
+        <LogoutBtn />
+      </header>
+    );
+
   return (
-    <header className="sticky">
+    <header className="sticky top-0 z-50 bg-white flex justify-center items-center p-5 shadow-sm">
       <div className="flex flex-col items-center space-y-5">
         <div className="flex space-x-2 items-center">
           <Image
@@ -13,15 +36,15 @@ const Header = () => {
             width={50}
             src="https://links.papareact.com/jne"
           />
+          <p className="text-blue-400">Welcome to Meta Messenger!</p>
         </div>
-        <p className="text-blue-400">Welcome to Meta Messenger!</p>
+        <Link
+          href="/auth/signin"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Sign In
+        </Link>
       </div>
-      <Link
-        href="/auth/signin"
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-      >
-        Sign In
-      </Link>
     </header>
   );
 };
