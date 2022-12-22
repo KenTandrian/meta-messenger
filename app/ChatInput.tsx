@@ -1,5 +1,7 @@
 "use client";
 import React, { useState } from "react";
+import { v4 as uuid } from "uuid";
+import { Message } from "../typings";
 
 const ChatInput = () => {
   const [input, setInput] = useState("");
@@ -10,6 +12,26 @@ const ChatInput = () => {
 
     const messageToSend = input;
     setInput("");
+
+    const id = uuid();
+    const message: Message = {
+      id,
+      message: messageToSend,
+      created_at: Date.now(),
+      username: "Kenneth Terry",
+      profilePic: "https://randomuser.me/api/portraits/men/52.jpg",
+      email: "kenneth.terry@example.com",
+    };
+    const uploadMessageToUpstash = async () => {
+      const res = await fetch("/api/addMessage", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ message }),
+      });
+      const data = await res.json();
+    };
   };
 
   return (
