@@ -10,10 +10,11 @@ const SignInPage = async () => {
     <div className="grid justify-center">
       <div>
         <Image
-          className="rounded-full mx-2 object-cover"
-          width={700}
-          height={700}
-          src="https://links.papareact.com/161"
+          className="mx-2 p-16 object-cover"
+          draggable={false}
+          width={350}
+          height={350}
+          src="/messenger.webp"
           alt="Profile Picture"
         />
       </div>

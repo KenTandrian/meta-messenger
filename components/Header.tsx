@@ -1,4 +1,4 @@
-import { Session, unstable_getServerSession } from "next-auth";
+import { Session } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -15,9 +15,10 @@ const Header = ({ session }: Props) => {
         <div className="flex space-x-2">
           <Image
             className="rounded-full mx-2 object-contain"
+            draggable={false}
             height={10}
             width={50}
-            src={session.user?.image || "https://links.papareact.com/jne"}
+            src={session.user?.image || "/meta.webp"}
             alt="Profile Picture"
           />
           <div>
@@ -35,9 +36,10 @@ const Header = ({ session }: Props) => {
         <div className="flex space-x-2 items-center">
           <Image
             alt="Logo"
-            height={10}
+            draggable={false}
+            height={50}
             width={50}
-            src="https://links.papareact.com/jne"
+            src="/meta.webp"
           />
           <p className="text-blue-400">Welcome to Meta Messenger!</p>
         </div>
