@@ -1,10 +1,11 @@
+import { unstable_getServerSession } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import LogoutBtn from "./LogoutBtn";
 
-const Header = () => {
-  const session = true;
+const Header = async () => {
+  const session = await unstable_getServerSession();
 
   if (session)
     return (
@@ -14,12 +15,12 @@ const Header = () => {
             className="rounded-full mx-2 object-contain"
             height={10}
             width={50}
-            src="https://links.papareact.com/jne"
+            src={session.user?.image || "https://links.papareact.com/jne"}
             alt="Profile Picture"
           />
           <div>
             <p className="text-blue-400">Logged in as:</p>
-            <p className="font-bold text-lg">Ken Tandrian</p>
+            <p className="font-bold text-lg">{session.user?.name}</p>
           </div>
         </div>
         <LogoutBtn />

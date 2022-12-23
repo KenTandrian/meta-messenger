@@ -1,17 +1,22 @@
 "use client";
+import { Session } from "next-auth";
 import React, { useState } from "react";
 import useSWR from "swr";
 import { v4 as uuid } from "uuid";
 import { Message } from "../typings";
 import fetcher from "../utils/fetchMessages";
 
-const ChatInput = () => {
+type Props = {
+  session: Session | null;
+};
+
+const ChatInput = ({ session }: Props) => {
   const [input, setInput] = useState("");
   const { data: messages, error, mutate } = useSWR("/api/getMessages", fetcher);
-  console.log(messages);
+
   const addMessage = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!input) return;
+    if (!input || !session) return;
 
     const messageToSend = input;
     setInput("");
@@ -21,9 +26,9 @@ const ChatInput = () => {
       id,
       message: messageToSend,
       created_at: Date.now(),
-      username: "Kenneth Terry",
-      profilePic: "https://randomuser.me/api/portraits/men/52.jpg",
-      email: "kenneth.terry@example.com",
+      username: session?.user?.name!,
+      profilePic: session?.user?.image!,
+      email: session?.user?.email!,
     };
     const uploadMessageToUpstash = async () => {
       const data = await fetch("/api/addMessage", {
@@ -50,20 +55,21 @@ const ChatInput = () => {
       <input
         type="text"
         value={input}
+        disabled={!session}
         onChange={(e) => setInput(e.target.value)}
         placeholder="Enter message here..."
         className="
-            flex-1 rounded border border-gray-300 focus:outline-none 
-            focus:ring-2 focus:ring-blue-600 focus:border-transparent px-4 py-2
-            disabled:opacity-50 disabled:cursor-not-allowed
+          flex-1 rounded border border-gray-300 focus:outline-none 
+          focus:ring-2 focus:ring-blue-600 focus:border-transparent px-4 py-2
+          disabled:opacity-50 disabled:cursor-not-allowed
         "
       />
       <button
         type="submit"
         disabled={!input}
         className="
-            bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded 
-            disabled:opacity-50 disabled:cursor-not-allowed
+          bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded 
+          disabled:opacity-50 disabled:cursor-not-allowed
         "
       >
         Send
