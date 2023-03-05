@@ -1,13 +1,13 @@
 import "../styles/globals.scss";
 import Header from "../components/Header";
-import { unstable_getServerSession } from "next-auth";
+import { getServerSession } from "next-auth";
 
 type Props = {
   children: React.ReactNode;
 };
 
 const RootLayout = async ({ children }: Props) => {
-  const session = await unstable_getServerSession();
+  const session = await getServerSession();
 
   return (
     <html>
