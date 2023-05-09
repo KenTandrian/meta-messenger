@@ -5,6 +5,7 @@ import useSWR from "swr";
 import { v4 as uuid } from "uuid";
 import { Message } from "../typings";
 import fetcher from "../utils/fetchMessages";
+import { sortByCreatedAt } from "src/utils/sortByCreatedAt";
 
 type Props = {
   session: Session | null;
@@ -37,10 +38,10 @@ const ChatInput = ({ session }: Props) => {
         body: JSON.stringify({ message }),
       }).then((resp) => resp.json());
 
-      return [data.message, ...messages!];
+      return [data.message, ...(messages ?? [])].sort(sortByCreatedAt);
     };
     await mutate(uploadMessageToUpstash, {
-      optimisticData: [message, ...messages!],
+      optimisticData: [message, ...(messages ?? [])].sort(sortByCreatedAt),
       rollbackOnError: true,
     });
   };

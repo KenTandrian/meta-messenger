@@ -2,13 +2,14 @@ import { NextRequest, NextResponse } from "next/server";
 import { serverPusher } from "src/pusher";
 import redis from "src/redis";
 import { Message } from "src/typings";
+import { sortByCreatedAt } from "src/utils/sortByCreatedAt";
 
 export async function GET() {
   try {
     const messagesRes = await redis.hvals("messages");
     const messages: Message[] = messagesRes
       .map((message) => JSON.parse(message))
-      .sort((a, b) => a.created_at - b.created_at);
+      .sort(sortByCreatedAt);
     return NextResponse.json({ messages }, { status: 200 });
   } catch (error: any) {
     return NextResponse.json(
