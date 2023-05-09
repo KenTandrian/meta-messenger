@@ -6,7 +6,7 @@ import { getServerSession } from "next-auth/next";
 import Providers from "./providers";
 
 const HomePage = async () => {
-  const data = await fetch(`${process.env.VERCEL_URL}/api/messages`, {
+  const data = await fetch(`https://${process.env.VERCEL_URL}/api/messages`, {
     method: "GET",
   }).then((res) => res.json());
   const messages: Message[] = data.messages;
