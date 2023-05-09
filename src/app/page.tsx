@@ -6,16 +6,16 @@ import { getServerSession } from "next-auth/next";
 import Providers from "./providers";
 
 const HomePage = async () => {
-  const data = await fetch(`${process.env.VERCEL_URL}/api/getMessages`).then(
-    (res) => res.json()
-  );
+  const data = await fetch(`${process.env.VERCEL_URL}/api/messages`, {
+    method: "GET",
+  }).then((res) => res.json());
   const messages: Message[] = data.messages;
   const session = await getServerSession();
 
   return (
     <Providers session={session}>
       <main>
-        <MessageList initialMessages={messages} />
+        <MessageList initialMessages={messages || []} />
         <ChatInput session={session} />
       </main>
     </Providers>

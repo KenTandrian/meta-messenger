@@ -12,7 +12,7 @@ type Props = {
 
 const ChatInput = ({ session }: Props) => {
   const [input, setInput] = useState("");
-  const { data: messages, error, mutate } = useSWR("/api/getMessages", fetcher);
+  const { data: messages, error, mutate } = useSWR("/api/messages", fetcher);
 
   const addMessage = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -31,11 +31,9 @@ const ChatInput = ({ session }: Props) => {
       email: session?.user?.email!,
     };
     const uploadMessageToUpstash = async () => {
-      const data = await fetch("/api/addMessage", {
+      const data = await fetch("/api/messages", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message }),
       }).then((resp) => resp.json());
 
