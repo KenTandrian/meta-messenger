@@ -1,7 +1,7 @@
 import React from "react";
-import { Message } from "../typings";
-import ChatInput from "../components/ChatInput";
-import MessageList from "../components/MessageList";
+import { Message } from "src/typings";
+import ChatInput from "src/components/ChatInput";
+import MessageList from "src/components/MessageList";
 import { getServerSession } from "next-auth/next";
 import Providers from "./providers";
 

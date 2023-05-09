@@ -1,7 +1,7 @@
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import React from "react";
-import { Message } from "../typings";
+import { Message } from "src/typings";
 import TimeAgo from "react-timeago";
 
 type Props = {

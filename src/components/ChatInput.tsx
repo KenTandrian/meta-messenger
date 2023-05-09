@@ -3,8 +3,8 @@ import { Session } from "next-auth";
 import React, { useState } from "react";
 import useSWR from "swr";
 import { v4 as uuid } from "uuid";
-import { Message } from "../typings";
-import fetcher from "../utils/fetchMessages";
+import { Message } from "src/typings";
+import fetcher from "src/utils/fetchMessages";
 import { sortByCreatedAt } from "src/utils/sortByCreatedAt";
 
 type Props = {

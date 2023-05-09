@@ -1,5 +1,5 @@
-import "../styles/globals.scss";
-import Header from "../components/Header";
+import "src/styles/globals.scss";
+import Header from "src/components/Header";
 import { getServerSession } from "next-auth";
 
 type Props = {
