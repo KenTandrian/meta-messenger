@@ -3,8 +3,6 @@ import { serverPusher } from "src/pusher";
 import redis from "src/redis";
 import { Message } from "src/typings";
 
-export const runtime = "edge";
-
 export async function GET() {
   try {
     const messagesRes = await redis.hvals("messages");
