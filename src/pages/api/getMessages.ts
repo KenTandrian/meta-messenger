@@ -19,9 +19,13 @@ export default async function handler(
     res.status(405).json({ body: "Method not Allowed" });
     return;
   }
-  const messagesRes = await redis.hvals("messages");
-  const messages: Message[] = messagesRes
-    .map((message) => JSON.parse(message))
-    .sort((a, b) => a.created_at - b.created_at);
-  res.status(200).json({ messages });
+  try {
+    const messagesRes = await redis.hvals("messages");
+    const messages: Message[] = messagesRes
+      .map((message) => JSON.parse(message))
+      .sort((a, b) => a.created_at - b.created_at);
+    res.status(200).json({ messages });
+  } catch (error: any) {
+    res.status(500).json({ body: error.message ?? "Internal Server Error" });
+  }
 }
