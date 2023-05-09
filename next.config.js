@@ -8,7 +8,4 @@ module.exports = {
       "platform-lookaside.fbsbx.com",
     ],
   },
-  experimental: {
-    appDir: true,
-  },
 };
