@@ -1,6 +1,6 @@
 {
   "name": "meta-messenger",
-  "version": "0.1.89",
+  "version": "0.1.93",
   "private": true,
   "scripts": {
     "dev": "next dev",
