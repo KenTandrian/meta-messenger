@@ -1,6 +1,7 @@
 {
   "name": "meta-messenger",
   "version": "0.3.5",
+  "packageManager": "yarn@1.22.22",
   "private": true,
   "scripts": {
     "dev": "next dev",
